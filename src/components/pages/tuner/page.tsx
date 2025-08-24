@@ -12,7 +12,7 @@ import Select from "../../designSystem/select";
 import Button from "../../designSystem/button";
 import IconButton from "../../designSystem/iconButton";
 
-export const Pitch = () => {
+export const Tuner = () => {
   const [activeInstrument, setActiveInstrument] = useState<Instrument>(
     instruments[0]
   );
@@ -100,6 +100,11 @@ export const Pitch = () => {
               onClick={() => {
                 handleNoteChange(note);
               }}
+              data-testid={
+                activeNote.frequency === note.frequency
+                  ? `note-${note.name}--active`
+                  : `note-${note.name}--inactive`
+              }
               progress={
                 activeNote.frequency === note.frequency
                   ? targetState === undefined
@@ -119,6 +124,7 @@ export const Pitch = () => {
       <div className="flex gap-2">
         <Select
           id="instrument-select"
+          data-testid="instrument-select"
           value={activeInstrument.name}
           onChange={handleInstrumentChange}
         >
@@ -130,12 +136,13 @@ export const Pitch = () => {
         </Select>
         <Select
           id="tuning-select"
+          data-testid="tuning-select"
           value={activeTuning.name}
           onChange={handleTuningChange}
         >
           {activeInstrument.tunings.map((tuning) => (
             <option key={tuning.name} value={tuning.name}>
-              Turning: {tuning.name}
+              Tuning: {tuning.name}
             </option>
           ))}
         </Select>
@@ -143,3 +150,5 @@ export const Pitch = () => {
     </div>
   );
 };
+
+export default Tuner;

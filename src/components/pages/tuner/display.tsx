@@ -19,6 +19,7 @@ const innerLarge = 18;
 const outerLarge = 47;
 
 interface SegmentProps {
+  position: number;
   start: number;
   end: number;
   isActive: boolean;
@@ -28,7 +29,7 @@ interface SegmentProps {
 
 const rotateCoordinates = (
   coordination: [number, number],
-  direction: "antiClockwise" | "clockwise",
+  direction: "antiClockwise" | "clockwise"
 ) => {
   if (direction === "clockwise") {
     return [coordination[0], coordination[1]];
@@ -43,6 +44,7 @@ const Segment = ({
   isActive,
   size = "small",
   direction = "clockwise",
+  position,
 }: SegmentProps) => {
   const inner =
     size === "small"
@@ -62,28 +64,28 @@ const Segment = ({
       Math.cos((Math.PI / 180) * (start - 90)) * inner,
       Math.sin((Math.PI / 180) * (start - 90)) * inner,
     ],
-    direction,
+    direction
   );
   const coord2 = rotateCoordinates(
     [
       Math.cos((Math.PI / 180) * (end - 90)) * inner,
       Math.sin((Math.PI / 180) * (end - 90)) * inner,
     ],
-    direction,
+    direction
   );
   const coord3 = rotateCoordinates(
     [
       Math.cos((Math.PI / 180) * (start - 90)) * outer,
       Math.sin((Math.PI / 180) * (start - 90)) * outer,
     ],
-    direction,
+    direction
   );
   const coord4 = rotateCoordinates(
     [
       Math.cos((Math.PI / 180) * (end - 90)) * outer,
       Math.sin((Math.PI / 180) * (end - 90)) * outer,
     ],
-    direction,
+    direction
   );
   return (
     <path
@@ -92,6 +94,7 @@ const Segment = ({
       stroke="#004b59"
       strokeWidth="0.1"
       className="transition-fill duration-100 delay-75"
+      data-testid={isActive ? `active-${position}` : `inactive-${position}`}
     />
   );
 };
@@ -116,15 +119,15 @@ export default function Display({ pitch, activeNote }: DisplayProps) {
         className="w-100 h-70"
         viewBox="-50 -50 100 70"
       >
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => {
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => {
           const activePitchLow = targetPitch
-            ? targetPitch + (i + 1) * segmentRange
+            ? targetPitch + i * segmentRange
             : null;
           const activePitchHigh =
-            i === 10
+            i === 11
               ? 1000
               : targetPitch
-                ? targetPitch + (i + 2) * segmentRange
+                ? targetPitch + (i + 1) * segmentRange
                 : null;
           const isActive =
             pitch !== undefined &&
@@ -133,7 +136,7 @@ export default function Display({ pitch, activeNote }: DisplayProps) {
             pitch > activePitchLow &&
             pitch < activePitchHigh;
 
-          const start = i * (width + gap) + 7;
+          const start = i * (width + gap) - 1;
           const end = start + width;
           return (
             <Segment
@@ -141,7 +144,8 @@ export default function Display({ pitch, activeNote }: DisplayProps) {
               start={start}
               end={end}
               isActive={isActive}
-              size={i === 10 ? "medium" : "small"}
+              size={i === 11 ? "medium" : "small"}
+              position={i}
             />
           );
         })}
@@ -152,17 +156,18 @@ export default function Display({ pitch, activeNote }: DisplayProps) {
           end={5}
           isActive={isActive}
           size="large"
+          position={0}
         />
 
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => {
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => {
           const activePitchLow = targetPitch
-            ? i === 10
+            ? i === 11
               ? 1
-              : targetPitch + (i * -1 - 2) * segmentRange
+              : targetPitch + (i * -1 - 1) * segmentRange
             : null;
 
           const activePitchHigh = targetPitch
-            ? targetPitch + (i * -1 - 1) * segmentRange
+            ? targetPitch + i * -1 * segmentRange
             : null;
           const isActive =
             pitch !== undefined &&
@@ -170,7 +175,7 @@ export default function Display({ pitch, activeNote }: DisplayProps) {
             activePitchHigh !== null &&
             pitch > activePitchLow &&
             pitch < activePitchHigh;
-          const start = i * (width + gap) - 90 + 7;
+          const start = i * (width + gap) - 90 - 1;
           const end = start + width;
           return (
             <Segment
@@ -178,8 +183,9 @@ export default function Display({ pitch, activeNote }: DisplayProps) {
               start={start}
               end={end}
               isActive={isActive}
-              size={i === 10 ? "medium" : "small"}
+              size={i === 11 ? "medium" : "small"}
               direction="antiClockwise"
+              position={-i}
             />
           );
         })}
