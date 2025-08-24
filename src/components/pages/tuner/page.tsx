@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetNote } from "../../../hooks/useGetNote";
-import { CiMicrophoneOn, CiMicrophoneOff } from "react-icons/ci";
+import { CiMicrophoneOn } from "react-icons/ci";
 import Display from "./display";
 import {
   instruments,
@@ -37,7 +37,7 @@ export const Pitch = () => {
       setActiveNote(nextNote);
       start(nextNote.frequency);
     }
-  }, [targetState, activeTuning, activeNote]);
+  }, [targetState, activeTuning, activeNote, stop, start]);
 
   const handleInstrumentChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -45,11 +45,11 @@ export const Pitch = () => {
     const selectedInstrumentName = event.target.value;
     const selectedInstrument = instruments.find(
       (instrument) => instrument.name === selectedInstrumentName
-    );
-    const newTuning = selectedInstrument?.tunings[0]!;
+    )!;
+    const newTuning = selectedInstrument.tunings[0];
 
     stop();
-    setActiveInstrument(selectedInstrument!);
+    setActiveInstrument(selectedInstrument);
     setActiveTuning(newTuning);
     setActiveNote(newTuning.notes[0]);
     start(newTuning.notes[0].frequency);

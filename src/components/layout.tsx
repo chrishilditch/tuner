@@ -19,7 +19,7 @@ export default function Layout({ children }: LayoutProps) {
     "rockNRoll",
   ];
   const [activeRocker, setActiveRocker] = useState(
-    rockers[Math.floor(Math.random() * rockers.length)]
+    rockers[Math.floor(Math.random() * rockers.length)],
   );
   const activeRockerSrc = `/img/rockers/${activeRocker}.png`;
 

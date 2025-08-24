@@ -5,7 +5,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = ({
   children,
-  className,
   variant = "dark-turquoise",
   progress,
   ...props

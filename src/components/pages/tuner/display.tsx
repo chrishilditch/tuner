@@ -28,7 +28,7 @@ interface SegmentProps {
 
 const rotateCoordinates = (
   coordination: [number, number],
-  direction: "antiClockwise" | "clockwise"
+  direction: "antiClockwise" | "clockwise",
 ) => {
   if (direction === "clockwise") {
     return [coordination[0], coordination[1]];
@@ -62,28 +62,28 @@ const Segment = ({
       Math.cos((Math.PI / 180) * (start - 90)) * inner,
       Math.sin((Math.PI / 180) * (start - 90)) * inner,
     ],
-    direction
+    direction,
   );
   const coord2 = rotateCoordinates(
     [
       Math.cos((Math.PI / 180) * (end - 90)) * inner,
       Math.sin((Math.PI / 180) * (end - 90)) * inner,
     ],
-    direction
+    direction,
   );
   const coord3 = rotateCoordinates(
     [
       Math.cos((Math.PI / 180) * (start - 90)) * outer,
       Math.sin((Math.PI / 180) * (start - 90)) * outer,
     ],
-    direction
+    direction,
   );
   const coord4 = rotateCoordinates(
     [
       Math.cos((Math.PI / 180) * (end - 90)) * outer,
       Math.sin((Math.PI / 180) * (end - 90)) * outer,
     ],
-    direction
+    direction,
   );
   return (
     <path

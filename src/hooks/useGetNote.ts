@@ -15,7 +15,7 @@ export function useGetNote() {
     analyserNode: AnalyserNode,
     detector: PitchDetector<Float32Array<ArrayBufferLike>>,
     input: Float32Array<ArrayBuffer>,
-    sampleRate: number
+    sampleRate: number,
   ) {
     analyserNode.getFloatTimeDomainData(input);
     const [pitch] = detector.findPitch(input, sampleRate);
@@ -75,7 +75,7 @@ export function useGetNote() {
         analyserNode,
         detector,
         input,
-        audioContext.sampleRate
+        audioContext.sampleRate,
       );
       const intervalValue = setInterval(() => {
         updatePitch(
@@ -83,7 +83,7 @@ export function useGetNote() {
           analyserNode,
           detector,
           input,
-          audioContext.sampleRate
+          audioContext.sampleRate,
         );
       }, 100);
 
@@ -105,7 +105,7 @@ export function useGetNote() {
         clearInterval(intervalValue);
       }
     },
-    [intervalValue]
+    [intervalValue],
   );
 
   return {

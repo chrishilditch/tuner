@@ -1,4 +1,4 @@
-interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {}
+type SelectProps = React.SelectHTMLAttributes<HTMLSelectElement>;
 
 const Select = ({ children, className, ...props }: SelectProps) => {
   return (
