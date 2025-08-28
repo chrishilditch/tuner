@@ -35,12 +35,12 @@ export default function Layout({ children }: LayoutProps) {
       <header className="flex flex-col justify-center items-center mb-4">
         <div className="flex justify-center items-center gap-1 my-6">
           <h1 className="text-4xl">
-            <img src="/img/logo.png" alt="Chris' Tuner" className="h-26" />
+            <img src="/img/logo.png" alt="Chris' Tuner" className="h-20 sm:h-26" />
           </h1>
           <img
             src={activeRockerSrc}
             alt="Logo"
-            className="h-26"
+            className="h-20 sm:h-26"
             onClick={changeRocker}
           />
         </div>

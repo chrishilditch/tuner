@@ -116,7 +116,7 @@ export default function Display({ pitch, activeNote }: DisplayProps) {
       <svg
         width="100"
         height="100"
-        className="w-100 h-70"
+        className="w-100 h-70 max-w-full"
         viewBox="-50 -50 100 70"
       >
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => {

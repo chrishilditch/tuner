@@ -87,7 +87,7 @@ export const Tuner = () => {
         )}
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 justify-center w-full">
         {activeTuning.notes.map((note, index) => {
           return (
             <Button
@@ -121,7 +121,7 @@ export const Tuner = () => {
         })}
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 justify-center">
         <Select
           id="instrument-select"
           data-testid="instrument-select"

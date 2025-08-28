@@ -14,8 +14,8 @@ const Button = ({
       {...props}
       className={
         variant === "dark-turquoise"
-          ? "relative bg-tuner-dark-turquoise text-white px-8 py-1 cursor-pointer rounded-sm"
-          : "relative bg-tuner-turquoise text-white px-8 py-1 cursor-pointer rounded-sm"
+          ? "relative bg-tuner-dark-turquoise text-white px-5 sm:px-8 py-1 cursor-pointer rounded-sm"
+          : "relative bg-tuner-turquoise text-white px-5 sm:spx-8 py-1 cursor-pointer rounded-sm"
       }
     >
       {progress !== undefined && (
